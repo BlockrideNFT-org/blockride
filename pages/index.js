@@ -1,6 +1,7 @@
 import React from 'react';
 import { Box } from '@chakra-ui/react';
 import Header from '../components/Header';
+import Hero from '../components/Hero';
 
 const Home = () => {
   return (
@@ -15,6 +16,7 @@ const Home = () => {
     >
       <Box maxW="1200px" w="100%" m="auto" h="100vh">
         <Header />
+        <Hero />
       </Box>
     </Box>
   );

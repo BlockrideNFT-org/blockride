@@ -8,6 +8,8 @@ import {
   MenuButton,
   MenuList,
   MenuItem,
+  IconButton,
+  Image,
 } from '@chakra-ui/react';
 
 import {
@@ -15,10 +17,8 @@ import {
   FaChevronUp,
   FaDiscord,
   FaTwitter,
+  FaBars,
 } from 'react-icons/fa';
-
-import logo from '../public/images/logo.svg';
-import Image from 'next/image';
 
 const Header = () => {
   const NavMenuItem = props => {
@@ -26,10 +26,11 @@ const Header = () => {
       <>
         {props.noDropdown ? (
           <Link
-            marginRight={10}
+            marginRight={5}
             fontWeight={700}
-            _hover={{ color: 'primary' }}
+            _hover={{ color: 'primary.500' }}
             href="/"
+            fontFamily="Poppins, san-serif"
           >
             {props.menuName}
           </Link>
@@ -48,10 +49,17 @@ const Header = () => {
                   }
                   bg="inherit"
                   fontWeight={700}
-                  _hover={{ cursor: 'pointer', color: 'primary' }}
-                  _active={{ bg: 'whiteAlpha.400', color: 'primary' }}
+                  colorScheme="primary"
+                  _hover={{
+                    cursor: 'pointer',
+                    color: 'primary.500',
+                  }}
+                  _active={{
+                    bg: 'whiteAlpha.400',
+                    color: 'primary.500',
+                  }}
                 >
-                  {props.menuName} &nbsp;
+                  {props.menuName}
                 </MenuButton>
                 <MenuList color="black">
                   {props.menuList?.map((item, i) => {
@@ -69,11 +77,15 @@ const Header = () => {
   return (
     <Box w="100%" p="24px" py="32px">
       <Flex justify="space-between" align="center">
-        <Box>
-          <Image src={logo} alt="logo " />
-        </Box>
+        <Link href="/">
+          <Image src="images/logo.svg" alt="logo " />
+        </Link>
         <Flex align="center">
-          <Flex marginRight={20} align="center">
+          <Flex
+            marginRight={20}
+            align="center"
+            display={['none', 'flex', 'flex']}
+          >
             <NavMenuItem menuName="Home" noDropdown />
             <NavMenuItem menuName="Learn" menuList={['link', 'link']} />
             <NavMenuItem menuName="Earn" menuList={['link', 'link']} />
@@ -83,8 +95,8 @@ const Header = () => {
               href="/"
               marginRight={10}
               fontSize="1.5rem"
-              color="primary"
-              _hover={{ color: 'inherit' }}
+              color="primary.500"
+              _hover={{ color: 'primary.600' }}
             >
               <FaDiscord />
             </Link>
@@ -92,15 +104,38 @@ const Header = () => {
               href="/"
               marginRight={10}
               fontSize="1.5rem"
-              color="primary"
-              _hover={{ color: 'inherit' }}
+              color="primary.500"
+              _hover={{ color: 'primary.600' }}
             >
               <FaTwitter />
             </Link>
           </Flex>
-          <Button color="black" bg="primary" px="24px" _hover={{ bg: 'white' }}>
+          <Button
+            color="black"
+            bg="primary.500"
+            colorScheme="primary"
+            px="24px"
+            display={['none', 'none', 'flex']}
+          >
             Stake
           </Button>
+          <Menu>
+            <MenuButton
+              as={IconButton}
+              aria-label="Options"
+              icon={<FaBars />}
+              variant="outline"
+              bg="inherit"
+              colorScheme="primary"
+              display={['flex', 'none', 'none']}
+            />
+            <MenuList color="black">
+              <MenuItem>Home</MenuItem>
+              <MenuItem>Learn</MenuItem>
+              <MenuItem>Earn</MenuItem>
+              <MenuItem>Stake</MenuItem>
+            </MenuList>
+          </Menu>
         </Flex>
       </Flex>
     </Box>
